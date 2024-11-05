@@ -2,7 +2,6 @@
 
 namespace Energia.WebSocket
 {
-    
     public class EnergiaDbContext : DbContext
     {
         public DbSet<EnergiaDados> Consumos { get; set; }

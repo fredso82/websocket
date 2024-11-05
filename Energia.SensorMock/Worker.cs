@@ -1,29 +1,21 @@
 
 using Microsoft.AspNetCore.SignalR.Client;
-using System.Threading;
 
 namespace Energia.SensorMock
 {
-    public class Worker : IHostedService, IDisposable
+    public class Worker(ILogger<Worker> logger) : IHostedService, IDisposable
     {
-        private readonly ILogger<Worker> _logger;
+        private readonly ILogger<Worker> _logger = logger;
         private Timer? _timer = null;
-        private HubConnection _connection;
-
-        public Worker(ILogger<Worker> logger)
-        {
-            _logger = logger;
-            _connection = new HubConnectionBuilder()
+        private readonly HubConnection _connection = new HubConnectionBuilder()
                 .WithUrl("https://localhost:7158/energiaHub")
                 .WithAutomaticReconnect()
                 .Build();
-        }
 
         public async Task StartAsync(CancellationToken cancellationToken)
         {
             await _connection.StartAsync(cancellationToken);
             _logger.LogInformation("Conexão com o Hub estabelecida.");
-
             _timer = new Timer(EnviarDados, null, TimeSpan.Zero, TimeSpan.FromSeconds(5));
         }
 
@@ -32,20 +24,21 @@ namespace Energia.SensorMock
             var random = new Random();
             var consumo = new
             {
-                Consumo = Math.Round(10 + random.NextDouble() * 100),
-                Timestamp = DateTime.UtcNow
+                Consumo = random.Next(10, 100),
+                Timestamp = DateTime.Now
             };
 
             try
             {
-                await _connection.InvokeAsync("EnviarConsumo", consumo);
+                await _connection.InvokeAsync("EnviarConsumo", consumo);                
+                _logger.LogInformation($"Dados Enviados. Consumido {consumo.Consumo} kWh em {consumo.Timestamp}.");
             }
             catch (Exception ex)
             {
                 _logger.LogError(ex, "Erro ao enviar dados de consumo de energia.");
             }
-
         }
+
         public Task StopAsync(CancellationToken cancellationToken)
         {
             _logger.LogInformation("Serviço parado");
@@ -54,9 +47,6 @@ namespace Energia.SensorMock
             return Task.CompletedTask;
         }
 
-        public void Dispose()
-        {
-            _timer?.Dispose();
-        }
+        public void Dispose() => _timer?.Dispose();
     }
 }

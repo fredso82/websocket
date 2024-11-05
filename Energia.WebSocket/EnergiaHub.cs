@@ -2,14 +2,9 @@
 
 namespace Energia.WebSocket
 {
-    public class EnergiaHub : Hub
+    public class EnergiaHub(EnergiaDbContext context) : Hub
     {
-        private EnergiaDbContext _context;
-
-        public EnergiaHub(EnergiaDbContext context)
-        {
-            _context = context;
-        }
+        private readonly EnergiaDbContext _context = context;
 
         public async Task EnviarConsumo(EnergiaDados dados)
         {
@@ -17,7 +12,7 @@ namespace Energia.WebSocket
             {
                 _context.Consumos.Add(dados);
                 await _context.SaveChangesAsync();
-                Console.WriteLine($"Dados Recebidos. Cosumido {dados.Consumo} kWh em {dados.Timestamp}");
+                Console.WriteLine($"Dados Recebidos. Consumido {dados.Consumo} kWh em {dados.Timestamp}.");
             }
             catch (Exception ex)
             {
