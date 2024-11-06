@@ -16,6 +16,10 @@ namespace Energia.WebSocket
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<Ambiente>().Property(a => a.Nome).IsRequired().HasColumnType("varchar").HasMaxLength(50);
+            modelBuilder.Entity<TipoDispositivo>().Property(t => t.Nome).IsRequired().HasColumnType("varchar").HasMaxLength(50);
+            modelBuilder.Entity<Dispositivo>().Property(d => d.Nome).IsRequired().HasColumnType("varchar").HasMaxLength(100);
+
             modelBuilder.Entity<Ambiente>().HasData(
                 new Ambiente { Id = 1, Nome = "Produção" },
                 new Ambiente { Id = 2, Nome = "Administrativo" }
