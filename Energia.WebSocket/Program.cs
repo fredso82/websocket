@@ -41,4 +41,3 @@ app.MapGet("/consumos", async (EnergiaDbContext context) =>
 }).WithName("consumos");
 
 app.Run();
-
