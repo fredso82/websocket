@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Energia.WebSocket", "Energi
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Energia.SensorMock", "Energia.SensorMock\Energia.SensorMock.csproj", "{99C7C16C-6C0D-4BB8-89FA-AE96F57712A7}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Energia.Api", "Energia.Api\Energia.Api.csproj", "{0103A80F-FE44-4099-88A8-DAAC6911FA5B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{99C7C16C-6C0D-4BB8-89FA-AE96F57712A7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{99C7C16C-6C0D-4BB8-89FA-AE96F57712A7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{99C7C16C-6C0D-4BB8-89FA-AE96F57712A7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0103A80F-FE44-4099-88A8-DAAC6911FA5B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0103A80F-FE44-4099-88A8-DAAC6911FA5B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0103A80F-FE44-4099-88A8-DAAC6911FA5B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0103A80F-FE44-4099-88A8-DAAC6911FA5B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
