@@ -37,7 +37,7 @@ namespace Energia.Api.Controllers
         {
             var ambienteBd = await _ambienteRepository.GetById(id);
             if (ambienteBd == null)
-                return NotFound($"Nenhum ambiente foi localizado como id {id}");
+                return NotFound($"Nenhum ambiente foi localizado com o id {id}");
 
             ambienteBd.Nome = ambiente.Nome;
             await _ambienteRepository.Update(ambienteBd);
@@ -53,7 +53,7 @@ namespace Energia.Api.Controllers
 
             var ambienteBd = await _ambienteRepository.GetById(id);
             if (ambienteBd == null)
-                return NotFound($"Nenhum ambiente foi localizado como id {id}");
+                return NotFound($"Nenhum ambiente foi localizado com o id {id}");
 
             await _ambienteRepository.Delete(ambienteBd);
 
